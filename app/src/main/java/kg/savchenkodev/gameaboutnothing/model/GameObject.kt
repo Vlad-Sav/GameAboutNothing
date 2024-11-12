@@ -4,15 +4,17 @@ import kg.savchenkodev.gameaboutnothing.game_domain.Coordinates
 import kg.savchenkodev.gameaboutnothing.game_domain.Size
 
 sealed class GameObject {
+    abstract val coordinates: Coordinates
     data class Character(
-        val coordinates: Coordinates
+        override val coordinates: Coordinates
     ): GameObject()
 
     data class Coin(
-        val coordinates: Coordinates
+        override val coordinates: Coordinates
     ): GameObject()
 
     data class Field(
+        override val coordinates: Coordinates,
         val size: Size
     ): GameObject()
 }
