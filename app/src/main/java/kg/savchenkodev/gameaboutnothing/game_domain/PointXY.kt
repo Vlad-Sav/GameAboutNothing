@@ -1,6 +1,6 @@
 package kg.savchenkodev.gameaboutnothing.game_domain
 
-data class Coordinates(
+data class PointXY(
     val x: Int,
     val y: Int
 )

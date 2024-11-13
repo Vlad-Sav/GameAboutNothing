@@ -1,4 +1,4 @@
-package kg.savchenkodev.gameaboutnothing.game.components
+package kg.savchenkodev.gameaboutnothing.game.presentation.utils
 
 import android.graphics.Point
 import androidx.compose.ui.geometry.Offset

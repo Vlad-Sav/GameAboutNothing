@@ -1,18 +1,18 @@
-package kg.savchenkodev.gameaboutnothing.game.components
+package kg.savchenkodev.gameaboutnothing.game.presentation.components
 
 import android.graphics.Point
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain
+import kg.savchenkodev.gameaboutnothing.game.presentation.utils.drawCharacter
+import kg.savchenkodev.gameaboutnothing.game.presentation.utils.drawField
 import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain.Companion.DEFAULT_LEVEL
 import kg.savchenkodev.gameaboutnothing.game_domain.Level
 
 @Composable
-fun GameScreen(
+fun GameField(
     modifier: Modifier = Modifier,
     level: Level = DEFAULT_LEVEL
 ) {
@@ -36,6 +36,6 @@ fun GameScreen(
 
 @Preview
 @Composable
-private fun GameScreenPreview() {
-    GameScreen()
+private fun GameFieldPreview() {
+    GameField()
 }

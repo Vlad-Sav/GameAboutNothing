@@ -11,54 +11,28 @@ class GameDomain {
 
     fun moveObject(
         gObject: GameObject,
-        diff: Coordinates,
+        diff: PointXY,
         direction: MoveDirection
     ): GameObject {
-        if(gObject !is GameObject.GameMoveableObject) return gObject
+        if (gObject !is GameObject.GameMoveableObject) return gObject
         val oldCoordinates = gObject.coordinates
-        return when(direction) {
-            MoveDirection.UP -> {
-                gObject.copyWithNewCoordinates(
-                    Coordinates(
-                        oldCoordinates.x,
-                        oldCoordinates.y + diff.y
-                    )
-                )
-            }
-            MoveDirection.DOWN -> {
-                gObject.copyWithNewCoordinates(
-                    Coordinates(
-                        oldCoordinates.x,
-                        oldCoordinates.y - diff.y
-                    )
-                )
-            }
-            MoveDirection.RIGHT -> {
-                gObject.copyWithNewCoordinates(
-                    Coordinates(
-                        oldCoordinates.x + diff.x,
-                        oldCoordinates.y
-                    )
-                )
-            }
-            MoveDirection.LEFT -> {
-                gObject.copyWithNewCoordinates(
-                    Coordinates(
-                        oldCoordinates.x - diff.x,
-                        oldCoordinates.y
-                    )
-                )
-            }
+        val newPointXY = when (direction) {
+            MoveDirection.UP -> PointXY(oldCoordinates.x, oldCoordinates.y + diff.y)
+            MoveDirection.DOWN -> PointXY(oldCoordinates.x, oldCoordinates.y - diff.y)
+            MoveDirection.RIGHT -> PointXY(oldCoordinates.x + diff.x, oldCoordinates.y)
+            MoveDirection.LEFT -> PointXY(oldCoordinates.x - diff.x, oldCoordinates.y)
         }
+
+        return gObject.copyWithNewCoordinates(newPointXY)
     }
 
     companion object {
         val DEFAULT_LEVEL = Level(
             character = GameObject.GameMoveableObject.Character(
-                coordinates = Coordinates(x = 2, y = 3)
+                coordinates = PointXY(x = 2, y = 3)
             ),
             coin = GameObject.GameMoveableObject.Coin(
-                coordinates = Coordinates(x = 2, y = 0)
+                coordinates = PointXY(x = 2, y = 0)
             ),
             field = GameObject.Field(
                 size = Size(4, 4)
