@@ -18,8 +18,6 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
-import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain
-import kg.savchenkodev.gameaboutnothing.model.GameObject
 import kg.savchenkodev.gameaboutnothing.ui.theme.GameAboutNothingTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,8 +29,7 @@ class MainActivity : ComponentActivity() {
             }
             GameAboutNothingTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = level.toString(),
+                    GameScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
