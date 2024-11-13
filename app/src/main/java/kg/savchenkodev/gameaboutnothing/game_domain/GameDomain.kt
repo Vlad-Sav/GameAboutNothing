@@ -6,18 +6,7 @@ class GameDomain {
     private var currentLevel: Level? = null
 
     fun loadLevel() {
-        currentLevel = Level(
-            character = GameObject.Character(
-                coordinates = Coordinates(x = 2, y = 3)
-            ),
-            coin = GameObject.Coin(
-                coordinates = Coordinates(x = 2, y = 0)
-            ),
-            field = GameObject.Field(
-                coordinates = Coordinates(0, 0),
-                size = Size(4, 4)
-            )
-        )
+        currentLevel = DEFAULT_LEVEL
     }
 
     fun moveObject(
@@ -25,11 +14,11 @@ class GameDomain {
         diff: Coordinates,
         direction: MoveDirection
     ): GameObject {
-        if(gObject !is GameObject.Character) return gObject
+        if(gObject !is GameObject.GameMoveableObject) return gObject
         val oldCoordinates = gObject.coordinates
         return when(direction) {
             MoveDirection.UP -> {
-                gObject.copy(
+                gObject.copyWithNewCoordinates(
                     Coordinates(
                         oldCoordinates.x,
                         oldCoordinates.y + diff.y
@@ -37,7 +26,7 @@ class GameDomain {
                 )
             }
             MoveDirection.DOWN -> {
-                gObject.copy(
+                gObject.copyWithNewCoordinates(
                     Coordinates(
                         oldCoordinates.x,
                         oldCoordinates.y - diff.y
@@ -45,7 +34,7 @@ class GameDomain {
                 )
             }
             MoveDirection.RIGHT -> {
-                gObject.copy(
+                gObject.copyWithNewCoordinates(
                     Coordinates(
                         oldCoordinates.x + diff.x,
                         oldCoordinates.y
@@ -53,7 +42,7 @@ class GameDomain {
                 )
             }
             MoveDirection.LEFT -> {
-                gObject.copy(
+                gObject.copyWithNewCoordinates(
                     Coordinates(
                         oldCoordinates.x - diff.x,
                         oldCoordinates.y
@@ -61,6 +50,20 @@ class GameDomain {
                 )
             }
         }
+    }
+
+    companion object {
+        val DEFAULT_LEVEL = Level(
+            character = GameObject.GameMoveableObject.Character(
+                coordinates = Coordinates(x = 2, y = 3)
+            ),
+            coin = GameObject.GameMoveableObject.Coin(
+                coordinates = Coordinates(x = 2, y = 0)
+            ),
+            field = GameObject.Field(
+                size = Size(4, 4)
+            )
+        )
     }
 }
 

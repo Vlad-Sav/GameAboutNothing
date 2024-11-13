@@ -7,19 +7,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain
+import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain.Companion.DEFAULT_LEVEL
+import kg.savchenkodev.gameaboutnothing.game_domain.Level
 
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
+    level: Level = DEFAULT_LEVEL
 ) {
     Canvas(
         modifier = modifier
             .fillMaxSize()
     ) {
-        val rows = 10
-        val columns = 5
+        val rows = level.field.size.height
+        val columns = level.field.size.width
         drawField(rows, columns)
-        drawCharacter(point = Point(2, 2), rows, columns)
+        drawCharacter(
+            point = Point(
+                level.character.coordinates.x,
+                level.character.coordinates.y
+            ),
+            rows,
+            columns
+        )
     }
 }
 
