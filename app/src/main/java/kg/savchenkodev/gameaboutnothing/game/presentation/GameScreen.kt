@@ -1,50 +1,30 @@
 package kg.savchenkodev.gameaboutnothing.game.presentation
 
-import android.graphics.Point
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import kg.savchenkodev.gameaboutnothing.game.presentation.components.ButtonPanel
-import kg.savchenkodev.gameaboutnothing.game.presentation.components.GameField
-import kg.savchenkodev.gameaboutnothing.game.presentation.utils.drawCharacter
-import kg.savchenkodev.gameaboutnothing.game.presentation.utils.drawField
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kg.savchenkodev.gameaboutnothing.game.presentation.components.GameScreenContent
 import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain.Companion.DEFAULT_LEVEL
 import kg.savchenkodev.gameaboutnothing.game_domain.Level
 
 @Composable
 fun GameScreen(
-    modifier: Modifier = Modifier,
-    level: Level = DEFAULT_LEVEL
+    modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        GameField(
-            modifier = Modifier
-                .fillMaxHeight(0.9f)
-                .padding(16.dp),
-            level = level
-        )
-        ButtonPanel(
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .fillMaxWidth()
-        )
-    }
-}
+    val viewModel = hiltViewModel<GameScreenViewModel>()
 
-@Preview
-@Composable
-private fun GameScreenPreview() {
-    GameScreen()
+    GameScreenContent(
+        modifier = modifier,
+        level = viewModel.level.collectAsStateWithLifecycle(),
+        onUp = {
+            viewModel.actionUp()
+        },
+        onLeft = {
+            viewModel.actionLeft()
+        },
+        onRight = {
+            viewModel.actionRight()
+        }
+    )
 }

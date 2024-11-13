@@ -5,11 +5,43 @@ import kg.savchenkodev.gameaboutnothing.model.GameObject
 class GameDomain {
     private var currentLevel: Level? = null
 
-    fun loadLevel() {
-        currentLevel = DEFAULT_LEVEL
+    fun loadLevel(): Level {
+        val level = DEFAULT_LEVEL
+        currentLevel = level
+        return level
     }
 
-    fun moveObject(
+    fun actionUp(): Level? {
+        val level = currentLevel ?: return null
+        val newObj = moveObject(
+            level.character,
+            PointXY(0, 1),
+            MoveDirection.UP
+        ) as? GameObject.GameMoveableObject.Character ?: return null
+        return level.copy(character = newObj)
+    }
+
+    fun actionLeft(): Level? {
+        val level = currentLevel ?: return null
+        val newObj = moveObject(
+            level.character,
+            PointXY(1, 0),
+            MoveDirection.LEFT
+        ) as? GameObject.GameMoveableObject.Character ?: return null
+        return level.copy(character = newObj)
+    }
+
+    fun actionRight(): Level? {
+        val level = currentLevel ?: return null
+        val newObj = moveObject(
+            level.character,
+            PointXY(1, 0),
+            MoveDirection.RIGHT
+        ) as? GameObject.GameMoveableObject.Character ?: return null
+        return level.copy(character = newObj)
+    }
+
+    private fun moveObject(
         gObject: GameObject,
         diff: PointXY,
         direction: MoveDirection

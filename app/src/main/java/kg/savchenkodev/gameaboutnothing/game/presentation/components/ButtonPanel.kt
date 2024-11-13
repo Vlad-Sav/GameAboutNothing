@@ -19,7 +19,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ButtonPanel(modifier: Modifier = Modifier) {
+fun ButtonPanel(
+    modifier: Modifier = Modifier,
+    onUp: () -> Unit = {},
+    onLeft: () -> Unit = {},
+    onRight: () -> Unit = {},
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -30,7 +35,7 @@ fun ButtonPanel(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth(0.25f)
                 .height(48.dp),
-            onClick = { }
+            onClick = onLeft
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
@@ -41,7 +46,7 @@ fun ButtonPanel(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth(0.33f)
                 .height(48.dp),
-            onClick = { }
+            onClick = onRight
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
@@ -52,7 +57,7 @@ fun ButtonPanel(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
-            onClick = { }
+            onClick = onUp
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowUp,
