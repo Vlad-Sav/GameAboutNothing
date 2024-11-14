@@ -11,34 +11,20 @@ class GameDomain {
         return level
     }
 
-    fun actionUp(): Level? {
+    fun moveCharacter(direction: MoveDirection): Level? {
         val level = currentLevel ?: return null
         val newObj = moveObject(
             level.character,
-            PointXY(0, 1),
-            MoveDirection.UP
+            when(direction) {
+                MoveDirection.UP -> PointXY(0, -1)
+                MoveDirection.LEFT -> PointXY(-1, 0)
+                MoveDirection.RIGHT -> PointXY(1, 0)
+                MoveDirection.DOWN -> PointXY(0, 1)
+            },
+            direction
         ) as? GameObject.GameMoveableObject.Character ?: return null
-        return level.copy(character = newObj)
-    }
-
-    fun actionLeft(): Level? {
-        val level = currentLevel ?: return null
-        val newObj = moveObject(
-            level.character,
-            PointXY(1, 0),
-            MoveDirection.LEFT
-        ) as? GameObject.GameMoveableObject.Character ?: return null
-        return level.copy(character = newObj)
-    }
-
-    fun actionRight(): Level? {
-        val level = currentLevel ?: return null
-        val newObj = moveObject(
-            level.character,
-            PointXY(1, 0),
-            MoveDirection.RIGHT
-        ) as? GameObject.GameMoveableObject.Character ?: return null
-        return level.copy(character = newObj)
+        currentLevel = level.copy(character = newObj)
+        return currentLevel
     }
 
     private fun moveObject(
@@ -49,8 +35,8 @@ class GameDomain {
         if (gObject !is GameObject.GameMoveableObject) return gObject
         val oldCoordinates = gObject.coordinates
         val newPointXY = when (direction) {
-            MoveDirection.UP -> PointXY(oldCoordinates.x, oldCoordinates.y + diff.y)
-            MoveDirection.DOWN -> PointXY(oldCoordinates.x, oldCoordinates.y - diff.y)
+            MoveDirection.UP -> PointXY(oldCoordinates.x, oldCoordinates.y - diff.y)
+            MoveDirection.DOWN -> PointXY(oldCoordinates.x, oldCoordinates.y + diff.y)
             MoveDirection.RIGHT -> PointXY(oldCoordinates.x + diff.x, oldCoordinates.y)
             MoveDirection.LEFT -> PointXY(oldCoordinates.x - diff.x, oldCoordinates.y)
         }

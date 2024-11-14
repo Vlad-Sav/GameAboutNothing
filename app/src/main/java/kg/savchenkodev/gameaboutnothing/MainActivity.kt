@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kg.savchenkodev.gameaboutnothing.game.presentation.GameScreen
 import kg.savchenkodev.gameaboutnothing.ui.theme.GameAboutNothingTheme
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
