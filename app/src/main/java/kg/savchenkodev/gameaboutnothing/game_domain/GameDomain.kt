@@ -1,11 +1,17 @@
 package kg.savchenkodev.gameaboutnothing.game_domain
 
+import kg.savchenkodev.gameaboutnothing.game_domain.repository.LevelsRepository
 import kg.savchenkodev.gameaboutnothing.model.GameObject
+import javax.inject.Inject
 
-class GameDomain {
+
+class GameDomain @Inject constructor(
+    private val levelsRepository: LevelsRepository
+) {
     private var currentLevel: Level? = null
 
-    fun loadLevel(): Level {
+    suspend fun loadLevel(): Level {
+        val levels = levelsRepository.getLevels()
         val level = DEFAULT_LEVEL
         currentLevel = level
         return level
@@ -16,8 +22,8 @@ class GameDomain {
         val newObj = moveObject(
             level.character,
             when(direction) {
-                MoveDirection.UP -> PointXY(0, -1)
-                MoveDirection.LEFT -> PointXY(-1, 0)
+                MoveDirection.UP -> PointXY(0, 1)
+                MoveDirection.LEFT -> PointXY(1, 0)
                 MoveDirection.RIGHT -> PointXY(1, 0)
                 MoveDirection.DOWN -> PointXY(0, 1)
             },
@@ -54,11 +60,8 @@ class GameDomain {
             ),
             field = GameObject.Field(
                 size = Size(4, 4)
-            )
+            ),
+            gameStatus = GameState.Started
         )
     }
-}
-
-enum class MoveDirection {
-    UP, DOWN, LEFT, RIGHT
 }

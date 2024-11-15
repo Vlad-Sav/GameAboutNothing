@@ -12,8 +12,6 @@ data class Size(
     val height: Int
 )
 
-sealed class GameState {
-    data object Loading: GameState()
-    data object Default: GameState()
-    data object Started: GameState()
+enum class GameState {
+   Loading, Default, Started
 }

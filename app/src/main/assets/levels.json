@@ -1,0 +1,14 @@
+[
+  {
+    "character": {
+      "coordinates": { "x": 5, "y": 10 }
+    },
+    "coin": {
+      "coordinates": { "x": 1, "y": 1 }
+    },
+    "field": {
+      "size": { "width": 10, "height": 10 }
+    },
+    "gameStatus": "Loading"
+  }
+]
