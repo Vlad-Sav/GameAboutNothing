@@ -1,8 +1,8 @@
 package kg.savchenkodev.gameaboutnothing.data.repository_impl
 
 import kg.savchenkodev.gameaboutnothing.data.storage.JsonFileReader
-import kg.savchenkodev.gameaboutnothing.game_domain.Level
-import kg.savchenkodev.gameaboutnothing.game_domain.repository.LevelsRepository
+import kg.savchenkodev.gameaboutnothing.domain.Level
+import kg.savchenkodev.gameaboutnothing.domain.repository.LevelsRepository
 import javax.inject.Inject
 
 class LevelsRepositoryImpl @Inject constructor(

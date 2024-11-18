@@ -1,7 +1,8 @@
-package kg.savchenkodev.gameaboutnothing.game_domain
+package kg.savchenkodev.gameaboutnothing.domain
 
-import kg.savchenkodev.gameaboutnothing.game_domain.repository.LevelsRepository
-import kg.savchenkodev.gameaboutnothing.model.GameObject
+import android.util.Log
+import kg.savchenkodev.gameaboutnothing.domain.repository.LevelsRepository
+import kg.savchenkodev.gameaboutnothing.domain.model.GameObject
 import javax.inject.Inject
 
 
@@ -9,12 +10,12 @@ class GameDomain @Inject constructor(
     private val levelsRepository: LevelsRepository
 ) {
     private var currentLevel: Level? = null
+    private var currentLevelIndex: Int = 0
 
-    suspend fun loadLevel(): Level {
+    suspend fun loadLevel(): Level? {
         val levels = levelsRepository.getLevels()
-        val level = DEFAULT_LEVEL
-        currentLevel = level
-        return level
+        currentLevel = levels.getOrNull(currentLevelIndex)
+        return currentLevel
     }
 
     fun moveCharacter(direction: MoveDirection): Level? {
@@ -29,7 +30,14 @@ class GameDomain @Inject constructor(
             },
             direction
         ) as? GameObject.GameMoveableObject.Character ?: return null
-        currentLevel = level.copy(character = newObj)
+        currentLevel = level.copy(
+            character = newObj,
+            levelStatus = if( level.coin.coordinates == newObj.coordinates) {
+                LevelState.Finished
+            } else {
+                LevelState.Started
+            }
+        )
         return currentLevel
     }
 
@@ -61,7 +69,7 @@ class GameDomain @Inject constructor(
             field = GameObject.Field(
                 size = Size(4, 4)
             ),
-            gameStatus = GameState.Started
+            levelStatus = LevelState.Started
         )
     }
 }

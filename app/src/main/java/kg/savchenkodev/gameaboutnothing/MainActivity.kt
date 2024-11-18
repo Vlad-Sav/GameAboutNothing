@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import kg.savchenkodev.gameaboutnothing.game.presentation.GameScreen
+import kg.savchenkodev.gameaboutnothing.feature_game.presentation.GameScreen
 import kg.savchenkodev.gameaboutnothing.ui.theme.GameAboutNothingTheme
 
 @AndroidEntryPoint

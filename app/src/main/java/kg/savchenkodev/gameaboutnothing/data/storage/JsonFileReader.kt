@@ -3,9 +3,8 @@ package kg.savchenkodev.gameaboutnothing.data.storage
 import android.content.Context
 import android.content.res.AssetManager
 import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapterFactory
 import kg.savchenkodev.gameaboutnothing.data.storage.type_adapters.EnumTypeAdapter
-import kg.savchenkodev.gameaboutnothing.game_domain.GameState
+import kg.savchenkodev.gameaboutnothing.domain.LevelState
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -18,7 +17,7 @@ class JsonFileReader(private val context: Context) {
             val jsonString: String = convertStreamToString(inputStream)
             inputStream.close()
             val gson = GsonBuilder()
-                .registerTypeAdapter(GameState::class.java, EnumTypeAdapter(GameState::class.java))
+                .registerTypeAdapter(LevelState::class.java, EnumTypeAdapter(LevelState::class.java))
                 .create()
 
             gson.fromJson(jsonString, model).toList()

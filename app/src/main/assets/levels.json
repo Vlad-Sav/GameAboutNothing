@@ -1,7 +1,7 @@
 [
   {
     "character": {
-      "coordinates": { "x": 5, "y": 10 }
+      "coordinates": { "x": 5, "y": 9 }
     },
     "coin": {
       "coordinates": { "x": 1, "y": 1 }

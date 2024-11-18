@@ -1,11 +1,11 @@
-package kg.savchenkodev.gameaboutnothing.game.presentation
+package kg.savchenkodev.gameaboutnothing.feature_game.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kg.savchenkodev.gameaboutnothing.game_domain.GameDomain
-import kg.savchenkodev.gameaboutnothing.game_domain.Level
-import kg.savchenkodev.gameaboutnothing.game_domain.MoveDirection
+import kg.savchenkodev.gameaboutnothing.domain.GameDomain
+import kg.savchenkodev.gameaboutnothing.domain.Level
+import kg.savchenkodev.gameaboutnothing.domain.MoveDirection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -23,8 +23,8 @@ class GameScreenViewModel @Inject constructor(
 
     private fun loadLevel() {
         viewModelScope.launch(Dispatchers.IO) {
-            val levels = game.loadLevel()
-            level.value = levels
+            val currentLevel = game.loadLevel()
+            level.value = currentLevel
         }
     }
 

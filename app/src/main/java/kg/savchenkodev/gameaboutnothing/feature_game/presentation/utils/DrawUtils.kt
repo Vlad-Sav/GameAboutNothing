@@ -1,4 +1,4 @@
-package kg.savchenkodev.gameaboutnothing.game.presentation.utils
+package kg.savchenkodev.gameaboutnothing.feature_game.presentation.utils
 
 import android.graphics.Point
 import androidx.compose.ui.geometry.Offset
@@ -28,6 +28,19 @@ fun DrawScope.drawCharacter(
     drawGameItem(
         point,
         Color.Yellow,
+        rows,
+        columns
+    )
+}
+
+fun DrawScope.drawCoin(
+    point: Point,
+    rows: Int,
+    columns: Int
+) {
+    drawGameItem(
+        point,
+        Color.Cyan,
         rows,
         columns
     )

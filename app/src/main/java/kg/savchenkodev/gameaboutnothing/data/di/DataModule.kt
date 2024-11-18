@@ -9,7 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kg.savchenkodev.gameaboutnothing.data.repository_impl.LevelsRepositoryImpl
 import kg.savchenkodev.gameaboutnothing.data.storage.JsonFileReader
-import kg.savchenkodev.gameaboutnothing.game_domain.repository.LevelsRepository
+import kg.savchenkodev.gameaboutnothing.domain.repository.LevelsRepository
 import javax.inject.Singleton
 
 @Module

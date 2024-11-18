@@ -1,11 +1,10 @@
-package kg.savchenkodev.gameaboutnothing.game.presentation
+package kg.savchenkodev.gameaboutnothing.feature_game.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import kg.savchenkodev.gameaboutnothing.game.presentation.components.GameScreenContent
+import kg.savchenkodev.gameaboutnothing.feature_game.presentation.components.GameScreenContent
 
 @Composable
 fun GameScreen(

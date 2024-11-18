@@ -1,7 +1,7 @@
-package kg.savchenkodev.gameaboutnothing.model
+package kg.savchenkodev.gameaboutnothing.domain.model
 
-import kg.savchenkodev.gameaboutnothing.game_domain.PointXY
-import kg.savchenkodev.gameaboutnothing.game_domain.Size
+import kg.savchenkodev.gameaboutnothing.domain.PointXY
+import kg.savchenkodev.gameaboutnothing.domain.Size
 
 sealed class GameObject {
     sealed class GameMoveableObject: GameObject() {
@@ -19,7 +19,7 @@ sealed class GameObject {
             override val coordinates: PointXY
         ): GameMoveableObject() {
             override fun copyWithNewCoordinates(newPointXY: PointXY)
-                    = Character(newPointXY)
+                    = Coin(newPointXY)
         }
     }
 
