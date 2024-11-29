@@ -89,6 +89,7 @@ fun DrawScope.drawField(
         color = Color.Blue,
         size = Size(width, height)
     )
+// TODO: When will create textures of ice, draw them
 //    for (i in 0..rows) {
 //        for (j in 0..columns) {
 //            drawRect(

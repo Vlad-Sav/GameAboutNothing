@@ -7,7 +7,12 @@ data class Level(
     val coin: GameObject.GameMoveableObject.Coin,
     val field: GameObject.Field,
     val levelStatus: LevelState
-)
+) {
+    init {
+        character.adjustPositionToField(field)
+        coin.adjustPositionToField(field)
+    }
+}
 
 enum class MoveDirection {
     UP, DOWN, LEFT, RIGHT

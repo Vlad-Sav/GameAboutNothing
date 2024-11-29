@@ -8,6 +8,13 @@ sealed class GameObject {
         abstract val coordinates: PointXY
         abstract fun copyWithNewCoordinates(newPointXY: PointXY): GameMoveableObject
 
+        fun adjustPositionToField(field: Field): GameMoveableObject {
+            val adjustedX = coordinates.x.coerceIn(0, field.size.width - 1)
+            val adjustedY = coordinates.y.coerceIn(0, field.size.height - 1)
+            val adjustedCoordinates = PointXY(adjustedX, adjustedY)
+            return copyWithNewCoordinates(adjustedCoordinates)
+        }
+
         data class Character(
             override val coordinates: PointXY
         ): GameMoveableObject() {
