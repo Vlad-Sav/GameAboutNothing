@@ -1,10 +1,17 @@
-package kg.savchenkodev.gameaboutnothing.game.components
+package kg.savchenkodev.gameaboutnothing.feature_game.presentation.utils
 
 import android.graphics.Point
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
+import kg.savchenkodev.gameaboutnothing.R
+import kg.savchenkodev.gameaboutnothing.ui.theme.Colors
 
 
 fun DrawScope.drawObstacle(
@@ -21,13 +28,31 @@ fun DrawScope.drawObstacle(
 }
 
 fun DrawScope.drawCharacter(
+    characterBitmap: ImageBitmap,
+    point: Point,
+    rows: Int,
+    columns: Int
+) {
+    val cellDensity = minOf(size.width / columns, size.height / rows)
+
+    drawImage(
+        image = characterBitmap,
+        dstOffset = IntOffset(
+            x = (point.x * cellDensity + cellDensity * 0.2).toInt(),
+            y = (point.y * cellDensity + cellDensity * 0.2).toInt()
+        ),
+        dstSize = IntSize((cellDensity * 0.6).toInt(), (cellDensity * 0.6).toInt()),
+    )
+}
+
+fun DrawScope.drawCoin(
     point: Point,
     rows: Int,
     columns: Int
 ) {
     drawGameItem(
         point,
-        Color.Yellow,
+        Color.Cyan,
         rows,
         columns
     )
@@ -61,9 +86,19 @@ fun DrawScope.drawField(
     val width = cellDensity * columns
 
     drawRect(
-        color = Color.Green,
+        color = Color.Blue,
         size = Size(width, height)
     )
+// TODO: When will create textures of ice, draw them
+//    for (i in 0..rows) {
+//        for (j in 0..columns) {
+//            drawRect(
+//                color = Colors.iceVariants.random(),
+//                topLeft = Offset(i * cellDensity, j * cellDensity),
+//                size = Size(cellDensity, cellDensity)
+//            )
+//        }
+//    }
 
     for (i in 0..columns) {
         drawLine(
